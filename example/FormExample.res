@@ -1,9 +1,9 @@
 module Styles = {
-  open Css;
-  let row = style([display(`flex), justifyContent(`flexEnd)]);
-};
+  open Css
+  let row = style(list{display(#flex), justifyContent(#flexEnd)})
+}
 
-let states = [|
+let states = [
   "AK",
   "AL",
   "AR",
@@ -54,10 +54,9 @@ let states = [|
   "WI",
   "WV",
   "WY",
-|];
-let stateOptions =
-  Js.Array.map((state): Select.selectOption => {label: state}, states);
-let getStateOptions = _value => {
+]
+let stateOptions = Js.Array.map((state): Select.selectOption => {label: state}, states)
+let getStateOptions = _value =>
   // let lowercaseValue = Js.String.toLowerCase(value);
   // Js.Array.filter(
   //   (option: Select.selectOption) =>
@@ -67,21 +66,18 @@ let getStateOptions = _value => {
   //     ),
   //   stateOptions,
   // )
-  stateOptions;
-};
+  stateOptions
 
-[@react.component]
+@react.component
 let make = () => {
-  let (state, setState) = React.useState(() => None);
-  let onStateChange = React.useCallback0(option => setState(_ => option));
+  let (state, setState) = React.useState(() => None)
+  let onStateChange = React.useCallback0(option => setState(_ => option))
   <div>
     <div className=Spacing.marginBottom16>
       <TextInput label="Street Address" placeholder="1 Folsom Street" />
     </div>
     <Grid.Row className=Spacing.marginBottom16>
-      <Grid.Cell span=6>
-        <TextInput label="City" placeholder="San Francisco" />
-      </Grid.Cell>
+      <Grid.Cell span=6> <TextInput label="City" placeholder="San Francisco" /> </Grid.Cell>
       <Grid.Cell span=6>
         <Select
           getOptions=getStateOptions
@@ -97,5 +93,5 @@ let make = () => {
     <div className=Styles.row>
       <Button type_=Button.Secondary> {React.string("Save")} </Button>
     </div>
-  </div>;
-};
+  </div>
+}
